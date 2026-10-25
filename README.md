@@ -6,6 +6,10 @@ Explore knowledge. Discover ideas. Learn without limits.
 
 InfoVerse is a responsive digital encyclopedia that helps users explore educational topics through search, subject categories, articles, bookmarks, and content-management features.
 
+🚀 Live Application
+
+👉 Click here to open the Automated Seating Arrangement System Link: https://infoverse-a-digital-encylopedia.onrender.com/
+
 ## ✨ Features
 
 - 🔎 Search and discover educational topics
