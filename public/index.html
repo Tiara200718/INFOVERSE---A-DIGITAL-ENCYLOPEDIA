@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="InfoVerse — The modern scholarly digital encyclopedia featuring comprehensive articles across Computer Science, Artificial Intelligence, World History, Astrophysics, and Philosophy.">
+  <meta name="keywords" content="encyclopedia, knowledge hub, computer science, history, space, philosophy, infoverse">
+  <meta name="author" content="Naina Project Team">
+  <title>InfoVerse — Modern Universal Digital Encyclopedia</title>
+
+  <!-- Google Fonts: Playfair Display (Serif), Inter (Sans), JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP PROJECT STATUS & VIVA DEFENSE BAR (FOR COLLEGE PRESENTATION)
+       ========================================================================== -->
+  <aside class="top-banner" aria-label="Project Presentation Status Bar">
+    <div class="banner-left">
+      <div class="module-badge">
+        <span class="module-pulse"></span>
+        <span>All 5 Modules Fully Implemented (100% Complete)</span>
+      </div>
+      <span style="font-weight: 500; color: var(--text-primary);">
+        InfoVerse Digital Encyclopedia (Complete 5-Module Architecture Live)
+      </span>
+    </div>
+
+    <div class="banner-actions">
+      <!-- Database Inspector (Answers "Where will data save?") -->
+      <button class="banner-btn gold-accent" data-action="open-db-inspector" id="btn-open-db-inspector" title="View live data persistence & SQL tables">
+        <span>🗄️ Database & Storage Inspector</span>
+      </button>
+
+      <!-- Viva Q&A Guide -->
+      <button class="banner-btn" data-action="open-viva-guide" id="btn-open-viva-guide" title="Quick answers for teacher & examiner questions">
+        <span>📋 Viva Q&A Guide</span>
+      </button>
+
+      <!-- Theme Switcher -->
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Obsidian/Parchment Mode">
+        ☀️
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       HEADER & SCHOLARLY NAVIGATION
+       ========================================================================== -->
+  <header class="navbar">
+    <a href="#" class="nav-brand" id="nav-brand-logo">
+      <div class="brand-icon-squircle">
+        <span class="brand-3d-icon">📚</span>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">InfoVerse</span>
+        <span class="brand-tagline">UNIVERSAL SCHOLARLY ENCYCLOPEDIA</span>
+      </div>
+    </a>
+
+    <nav class="nav-menu" aria-label="Main Navigation">
+      <a href="#hero-section" class="nav-link active">Home</a>
+      <a href="#module-overview-section" class="nav-link">Project Modules</a>
+      <a href="#info-display-section" class="nav-link">Information Display</a>
+      <a href="#cms-management-section" class="nav-link">Content CMS</a>
+      <a href="#admin-user-management-section" class="nav-link">User & Admin Hub</a>
+      <a href="#categories-section" class="nav-link">Knowledge Categories</a>
+    </nav>
+
+    <div class="nav-actions">
+      <!-- Admin Mode Active Indicator Badge -->
+      <span class="nav-admin-badge" id="nav-admin-badge" style="display: none;" title="Logged in as Platform Administrator">
+        👑 Admin Mode
+      </span>
+
+      <!-- User Profile (Visible when logged in) -->
+      <div class="user-nav-profile" id="user-nav-profile" style="display: none;" title="View Your Scholar Profile">
+        <div class="user-avatar-circle" id="user-nav-avatar">V</div>
+        <div class="user-nav-details">
+          <span class="user-nav-name" id="user-nav-name">Vyshnavi Donga</span>
+        </div>
+        <button class="user-logout-chip" id="nav-logout-btn" title="Sign out">Logout</button>
+      </div>
+
+      <!-- Auth Action Buttons (Visible when guest) -->
+      <div class="nav-auth-actions" id="nav-auth-actions">
+        <button class="btn btn-secondary" data-action="open-auth-modal" data-tab="login" id="nav-login-btn">
+          Sign In
+        </button>
+        <button class="btn btn-primary" data-action="open-auth-modal" data-tab="register" id="nav-register-btn">
+          Register Account
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION WITH UNIVERSAL SEARCH ENGINE
+         ========================================================================== -->
+    <section class="hero-section" id="hero-section">
+      <div class="hero-pill">
+        <span>✨ The Modern Digital Encyclopedia of Human Knowledge</span>
+      </div>
+
+      <h1 class="hero-title">
+        Discover the Pillars of <span>Science, History & Mind</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        An interactive, curated academic repository featuring peer-reviewed summaries in Computer Science, Artificial Intelligence, Ancient History, Quantum Physics, and Classical Philosophy.
+      </p>
+
+      <!-- Instant Live Search Bar -->
+      <div class="search-container">
+        <div class="search-box-wrapper">
+          <span class="search-icon" id="hero-search-btn" style="cursor: pointer;" title="Search and Jump to Topic in Encyclopedia">🔍</span>
+          <input 
+            type="text" 
+            id="hero-search-input" 
+            class="search-input" 
+            placeholder="Search thousands of scholarly topics (e.g. 'Neural Networks', 'Alexandria', 'Quantum')..." 
+            autocomplete="off"
+            aria-label="Search Encyclopedia"
+          >
+          <select class="search-category-select" id="search-category-filter" aria-label="Filter Search by Category">
+            <option value="all">All Disciplines</option>
+            <option value="cs-ai">Computer Science & AI</option>
+            <option value="history">World History</option>
+            <option value="space">Astrophysics & Space</option>
+            <option value="science">Natural Sciences</option>
+            <option value="philosophy">Philosophy & Literature</option>
+          </select>
+        </div>
+
+        <!-- Real-time Auto-Suggest Dropdown -->
+        <div class="search-suggestions" id="search-suggestions"></div>
+      </div>
+
+      <!-- Trending Knowledge Tags -->
+      <div class="trending-keywords">
+        <span>Trending Research:</span>
+        <div id="trending-tags-container" style="display: inline-flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MODULE ROADMAP OVERVIEW (COLLEGE PRESENTATION DISPLAY)
+         ========================================================================== -->
+    <section class="module-overview-section" id="module-overview-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">🎓 InfoVerse Project Architecture</h2>
+          <p class="section-subtitle">Complete 5-Module Academic Engineering Architecture (100% Implemented)</p>
+        </div>
+        <button class="banner-btn gold-accent" data-action="open-viva-guide">
+          📖 View Viva Q&A Notes
+        </button>
+      </div>
+
+      <div class="module-grid">
+        <!-- Module 1 -->
+        <div class="module-card completed">
+          <div class="module-num">Module 1 / 5</div>
+          <h3 class="module-name">🔐 Auth & User System</h3>
+          <p class="module-desc">User Registration, Login validation, Password strength meter, Session storage & User Database.</p>
+          <span class="module-status-tag status-done">✓ Implemented</span>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card completed">
+          <div class="module-num">Module 2 / 5</div>
+          <h3 class="module-name">🏠 Encyclopedia Hub</h3>
+          <p class="module-desc">Academic category navigation, Instant live search engine, Auto-suggestions & spotlight showcase.</p>
+          <span class="module-status-tag status-done">✓ Implemented</span>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card completed" id="module-3-card">
+          <div class="module-num">Module 3 / 5</div>
+          <h3 class="module-name">📖 Information Display Module</h3>
+          <p class="module-desc">Responsible for presenting detailed content of topics in a clean format with typography controls, audio TTS reader, and dynamic TOC.</p>
+          <span class="module-status-tag status-done">✓ Implemented</span>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card completed" id="module-4-card">
+          <div class="module-num">Module 4 / 5</div>
+          <h3 class="module-name">✍️ Content Management Module</h3>
+          <p class="module-desc">Handles addition, editing and deletion of information across categories without directly modifying underlying code.</p>
+          <span class="module-status-tag status-done">✓ Implemented</span>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module-card completed" id="module-5-card">
+          <div class="module-num">Module 5 / 5</div>
+          <h3 class="module-name">🛡️ User & Admin Management</h3>
+          <p class="module-desc">Role-based access control distinguishing regular users from administrators, restricting content modification to authorized access.</p>
+          <span class="module-status-tag status-done">✓ Implemented</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FEATURED ARTICLE OF THE DAY SPOTLIGHT
+         ========================================================================== -->
+    <section class="featured-spotlight" id="featured-spotlight-section">
+      <div class="spotlight-card">
+        <div class="spotlight-info">
+          <div class="spotlight-tag">
+            <span>⭐ Article of the Day</span>
+            <span>•</span>
+            <span>Artificial Intelligence</span>
+          </div>
+
+          <h2 class="spotlight-title">The Architecture of Modern Artificial Neural Networks</h2>
+
+          <p class="spotlight-excerpt">
+            From biological synapses to transformer multi-head self-attention mechanisms: an academic exploration of backpropagation algorithms, tensor operations, and how artificial intelligence decodes human language.
+          </p>
+
+          <div class="spotlight-highlights">
+            <div class="spotlight-stat">
+              <div class="stat-value">6 Min</div>
+              <div class="stat-label">Reading Time</div>
+            </div>
+            <div class="spotlight-stat">
+              <div class="stat-value">Intermediate</div>
+              <div class="stat-label">Academic Level</div>
+            </div>
+            <div class="spotlight-stat">
+              <div class="stat-value">ACID / ML</div>
+              <div class="stat-label">Topic Area</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="window.infoVerseApp.encyclopedia.openArticleReader('art-001')">
+              📖 Read Full Entry
+            </button>
+            <button class="btn btn-secondary" onclick="window.infoVerseApp.encyclopedia.handleBookmarkClick('art-001', event)">
+              ★ Save to Bookmarks
+            </button>
+          </div>
+        </div>
+
+        <div class="spotlight-visual" style="background-image: url('images/neural_network_ai.jpg');"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         KNOWLEDGE CATEGORIES & ARTICLE DISCOVERY GRID
+         ========================================================================== -->
+    <section class="categories-section" id="categories-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">📚 Encyclopedia Knowledge Base</h2>
+          <p class="section-subtitle">Filter scholarly entries by academic disciplines</p>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-tabs" role="tablist">
+        <button class="category-tab-btn active" data-category="all" role="tab">
+          <span>🌐 All Disciplines</span>
+        </button>
+        <button class="category-tab-btn" data-category="cs-ai" role="tab">
+          <span>💻 Computer Science & AI</span>
+        </button>
+        <button class="category-tab-btn" data-category="history" role="tab">
+          <span>🏛️ World History</span>
+        </button>
+        <button class="category-tab-btn" data-category="space" role="tab">
+          <span>🌌 Astrophysics & Space</span>
+        </button>
+        <button class="category-tab-btn" data-category="science" role="tab">
+          <span>🧬 Natural Sciences</span>
+        </button>
+        <button class="category-tab-btn" data-category="philosophy" role="tab">
+          <span>📜 Philosophy & Literature</span>
+        </button>
+      </div>
+
+      <!-- Dynamic Articles Grid -->
+      <div class="articles-grid" id="articles-grid">
+        <!-- Rendered dynamically by encyclopedia.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MODULE 3: INFORMATION DISPLAY MODULE
+         Responsible for presenting the detailed content of a selected topic or category
+         to the user in a clean, readable format. It handles the layout of text, headings,
+         and any supporting images associated with a topic, ensuring a consistent reading experience.
+         ========================================================================== -->
+    <section class="info-display-section" id="info-display-section">
+      <div class="section-header">
+        <div>
+          <div class="module-subhead-pill">
+            <span class="module-pulse"></span>
+            <span>Module 3 / 5 Core Display System</span>
+          </div>
+          <h2 class="section-title">📖 Information Display Module</h2>
+          <p class="section-subtitle">
+            Responsible for presenting the detailed content of a selected topic or category to the user in a clean, readable format. It handles the layout of text, headings and any supporting images associated with a topic, ensuring a consistent reading experience across the site.
+          </p>
+        </div>
+        <div class="display-header-actions">
+          <div class="topic-picker-wrap">
+            <label for="display-topic-select" class="picker-label">Select Topic / Category:</label>
+            <select id="display-topic-select" class="display-topic-select" aria-label="Select Topic to Display">
+              <!-- Populated dynamically by encyclopedia.js -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Display Layout Container (Dual Pane: Sidebar controls + Content Canvas) -->
+      <div class="display-layout-card">
+        
+        <!-- Reading Progress Indicator -->
+        <div class="display-progress-track">
+          <div class="display-progress-bar" id="display-reading-progress"></div>
+        </div>
+
+        <div class="display-layout-grid">
+          
+          <!-- Left Assistive Control Sidebar (Table of Contents, Topic Details, Accessibility) -->
+          <aside class="display-sidebar">
+            
+            <!-- Quick Category / Tag Details -->
+            <div class="sidebar-widget info-widget">
+              <div class="widget-header">
+                <span class="widget-icon">🏷️</span>
+                <h4>Topic Metadata</h4>
+              </div>
+              <div class="sidebar-meta-list">
+                <div class="sidebar-meta-item">
+                  <span class="meta-label">Discipline</span>
+                  <span class="meta-val" id="display-sidebar-category">Computer Science</span>
+                </div>
+                <div class="sidebar-meta-item">
+                  <span class="meta-label">Academic Level</span>
+                  <span class="meta-val" id="display-sidebar-difficulty">Intermediate</span>
+                </div>
+                <div class="sidebar-meta-item">
+                  <span class="meta-label">Read Time</span>
+                  <span class="meta-val" id="display-sidebar-time">6 min read</span>
+                </div>
+                <div class="sidebar-meta-item">
+                  <span class="meta-label">Author</span>
+                  <span class="meta-val" id="display-sidebar-author">Alan Turing Fellow</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reading Accessibility & Layout Controls -->
+            <div class="sidebar-widget">
+              <div class="widget-header">
+                <span class="widget-icon">⚙️</span>
+                <h4>Display & Typography</h4>
+              </div>
+              <div class="display-controls-grid">
+                <div class="control-row">
+                  <span class="control-label">Font Size</span>
+                  <div class="control-btn-group">
+                    <button class="control-btn" id="display-font-dec" title="Decrease font size">A−</button>
+                    <span class="control-indicator" id="display-font-val">18px</span>
+                    <button class="control-btn" id="display-font-inc" title="Increase font size">A+</button>
+                  </div>
+                </div>
+
+                <div class="control-row">
+                  <span class="control-label">Font Type</span>
+                  <div class="control-btn-group">
+                    <button class="control-btn active" id="display-font-serif" title="Serif Editorial Font">Serif</button>
+                    <button class="control-btn" id="display-font-sans" title="Sans Modern Font">Sans</button>
+                  </div>
+                </div>
+
+                <div class="control-row">
+                  <span class="control-label">Line Spacing</span>
+                  <div class="control-btn-group">
+                    <button class="control-btn active" id="display-spacing-comf" title="Comfortable Line Spacing">1.85</button>
+                    <button class="control-btn" id="display-spacing-comp" title="Compact Line Spacing">1.55</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Table of Contents -->
+            <div class="sidebar-widget">
+              <div class="widget-header">
+                <span class="widget-icon">📑</span>
+                <h4>Table of Contents</h4>
+              </div>
+              <nav class="display-toc-list" id="display-toc-list" aria-label="Topic Headings">
+                <!-- Generated dynamically from article h2 tags -->
+              </nav>
+            </div>
+
+            <!-- Assistive Audio & Actions -->
+            <div class="sidebar-widget">
+              <div class="widget-header">
+                <span class="widget-icon">🎧</span>
+                <h4>Reader Assist</h4>
+              </div>
+              <div class="sidebar-action-buttons">
+                <button class="btn btn-primary" id="display-tts-btn" style="width: 100%; justify-content: center; padding: 0.65rem;">
+                  🔊 Read Topic Aloud
+                </button>
+                <button class="btn btn-secondary" id="display-bookmark-btn" style="width: 100%; justify-content: center; padding: 0.65rem;">
+                  ⭐ Bookmark Topic
+                </button>
+                <button class="btn btn-secondary" id="display-modal-expand-btn" style="width: 100%; justify-content: center; padding: 0.65rem;">
+                  ⤢ Open Full Modal View
+                </button>
+              </div>
+            </div>
+
+          </aside>
+
+          <!-- Main Reading Canvas: Clean, readable format with text, headings, and supporting images -->
+          <article class="display-canvas" id="display-canvas-article">
+            
+            <!-- Topic Header Banner -->
+            <header class="display-article-header">
+              <div class="display-header-pills">
+                <span class="display-badge-category" id="display-badge-category">Computer Science & AI</span>
+                <span class="display-badge-tag" id="display-badge-tag">Artificial Intelligence</span>
+                <span class="display-badge-date" id="display-badge-date">August 2026</span>
+              </div>
+              
+              <h1 class="display-article-title" id="display-article-title">
+                The Architecture of Modern Artificial Neural Networks
+              </h1>
+              
+              <p class="display-article-summary" id="display-article-summary">
+                An in-depth exploration of transformer architectures, attention mechanisms, backpropagation algorithms, and how modern deep learning models process human language.
+              </p>
+
+              <div class="display-author-bar">
+                <div class="display-author-info">
+                  <div class="display-author-avatar" id="display-author-avatar">📖</div>
+                  <div>
+                    <div class="display-author-name" id="display-author-name">Dr. Alan Turing Fellow</div>
+                    <div class="display-author-role">Peer-Reviewed Faculty Entry</div>
+                  </div>
+                </div>
+                <div class="display-read-stats">
+                  <span id="display-read-time">⏳ 6 min read</span>
+                  <span>•</span>
+                  <span id="display-level">Level: Intermediate</span>
+                </div>
+              </div>
+            </header>
+
+            <!-- Supporting Image Card with Caption -->
+            <figure class="display-figure">
+              <div class="display-figure-img-wrap">
+                <img id="display-article-image" src="images/neural_network_ai.jpg" alt="Supporting topic visualization" class="display-main-image">
+                <div class="display-img-badge" id="display-img-badge">Supporting Topic Visual</div>
+              </div>
+              <figcaption class="display-figure-caption" id="display-figure-caption">
+                📷 <strong>Supporting Figure:</strong> Structural visualization illustrating interconnected computational layers, tensor weights, and backpropagation pathways.
+              </figcaption>
+            </figure>
+
+            <!-- Key Takeaways Highlight Box -->
+            <div class="display-takeaways-box" id="display-takeaways-box">
+              <div class="takeaways-header">
+                <span>💡</span>
+                <strong>Key Takeaway & Topic Core</strong>
+              </div>
+              <p id="display-takeaway-text">
+                Neural networks compute complex non-linear approximations by chaining linear transformations, loss functions, and reverse gradient propagation.
+              </p>
+            </div>
+
+            <!-- Structured Editorial Body Content (Formatted Headings, Paragraphs, Blockquotes, Lists) -->
+            <div class="display-article-content" id="display-article-content">
+              <!-- Dynamically populated from database article content -->
+            </div>
+
+            <!-- Bottom Topic Navigator (Prev / Next Topic in Category) -->
+            <footer class="display-footer-nav">
+              <button class="topic-nav-btn prev" id="display-prev-topic-btn">
+                <span class="nav-arrow">←</span>
+                <div class="nav-text">
+                  <span class="nav-label">Previous Topic</span>
+                  <span class="nav-title" id="display-prev-topic-title">Relational Databases</span>
+                </div>
+              </button>
+              <button class="topic-nav-btn next" id="display-next-topic-btn">
+                <div class="nav-text">
+                  <span class="nav-label">Next Topic</span>
+                  <span class="nav-title" id="display-next-topic-title">Library of Alexandria</span>
+                </div>
+                <span class="nav-arrow">→</span>
+              </button>
+            </footer>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MODULE 4: CONTENT MANAGEMENT MODULE
+         This module handles the addition, editing and deletion of information within
+         the platform. It is primarily used by the site administrator to keep the
+         content of each category up to date, and provides a simple interface for
+         managing topics without directly editing the underlying code.
+         ========================================================================== -->
+    <section class="cms-management-section" id="cms-management-section">
+      <div class="section-header">
+        <div>
+          <div class="module-subhead-pill">
+            <span class="module-pulse"></span>
+            <span>Module 4 of 5 • Content Management Module</span>
+          </div>
+          <h2 class="section-title">✍️ Content Management Studio</h2>
+          <p class="section-subtitle">
+            Administrative editorial interface for adding, editing, and deleting encyclopedia topics across all disciplines without modifying code.
+          </p>
+        </div>
+        <div class="cms-header-actions">
+          <button class="btn btn-primary" id="cms-new-topic-btn">
+            <span>➕</span> Author New Topic
+          </button>
+        </div>
+      </div>
+
+      <!-- RBAC Access Gate (Shown for Regular Non-Admin Scholars) -->
+      <div class="rbac-guard-card" id="cms-rbac-guard" style="display: none;">
+        <div class="rbac-guard-icon">🛡️</div>
+        <div class="rbac-guard-content">
+          <div class="rbac-pill-status">Restricted Access (Module 5 Security Rule)</div>
+          <h3>Administrator Authentication Required</h3>
+          <p>
+            The <strong>Content Management Module</strong> is restricted to platform administrators to keep category content verified and prevent unauthorized modifications. You are currently logged in as a <em>Student Scholar / Regular Reader</em>.
+          </p>
+          <div class="rbac-action-row">
+            <button class="btn btn-primary" data-action="switch-to-admin-demo">
+              👑 Switch to Administrator Session (Demo Mode)
+            </button>
+            <button class="btn btn-secondary" data-action="open-auth-modal" data-tab="login">
+              🔑 Sign in with Admin Credentials
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CMS Unlocked Workspace (Visible for Administrator) -->
+      <div class="cms-workspace" id="cms-workspace-content">
+        <!-- Tabs Header -->
+        <div class="cms-tabs-bar">
+          <button class="cms-tab-btn active" data-tab="cms-pane-inventory">
+            <span>📚</span> Topic Inventory & Management
+          </button>
+          <button class="cms-tab-btn" data-tab="cms-pane-studio">
+            <span>✍️</span> Publish & Edit Topic Studio
+          </button>
+          <div class="cms-badge-right" id="cms-total-topics-badge">6 Published Topics</div>
+        </div>
+
+        <!-- TAB 1: ARTICLE INVENTORY TABLE -->
+        <div class="cms-tab-pane active" id="cms-pane-inventory">
+          <div class="cms-table-filter-bar">
+            <div class="search-box-wrapper" style="flex: 1; max-width: 450px; padding: 0.35rem 1rem;">
+              <span class="search-icon" style="font-size: 1rem;">🔍</span>
+              <input type="text" id="cms-article-search" class="search-input" style="font-size: 0.9rem;" placeholder="Filter topics by title, author, or keyword...">
+            </div>
+            <select class="search-category-select" id="cms-category-filter">
+              <option value="all">All Categories</option>
+              <option value="cs-ai">Computer Science & AI</option>
+              <option value="history">World History</option>
+              <option value="space">Astrophysics & Space</option>
+              <option value="science">Natural Sciences</option>
+              <option value="philosophy">Philosophy & Literature</option>
+            </select>
+          </div>
+
+          <div class="cms-table-wrapper">
+            <table class="cms-table">
+              <thead>
+                <tr>
+                  <th style="width: 32%;">Topic & Digital Identifier</th>
+                  <th style="width: 18%;">Discipline</th>
+                  <th style="width: 16%;">Author / Affiliation</th>
+                  <th style="width: 14%;">Academic Level</th>
+                  <th style="width: 10%;">Date</th>
+                  <th style="width: 10%; text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="cms-articles-table-body">
+                <!-- Rendered dynamically by encyclopedia.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 2: PUBLISH & EDIT TOPIC STUDIO -->
+        <div class="cms-tab-pane" id="cms-pane-studio">
+          <div class="cms-studio-card">
+            <div class="studio-header">
+              <h3 id="cms-studio-heading" style="font-family: var(--font-serif); font-size: 1.4rem; color: #ffffff;">
+                Author & Publish New Topic
+              </h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem;">
+                Fill in the peer-reviewed fields below. Changes persist directly into the persistent client storage.
+              </p>
+            </div>
+
+            <form id="cms-article-form" class="cms-form-grid">
+              <input type="hidden" id="cms-form-id" value="">
+
+              <div class="form-group col-span-2">
+                <label class="form-label" for="cms-form-title">Topic Title *</label>
+                <input type="text" id="cms-form-title" class="form-input" placeholder="e.g. Modern Computational Linguistics & LLMs" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cms-form-category">Academic Discipline (Category) *</label>
+                <select id="cms-form-category" class="form-input" required>
+                  <option value="Computer Science & AI">Computer Science & AI</option>
+                  <option value="World History">World History</option>
+                  <option value="Astrophysics & Space">Astrophysics & Space</option>
+                  <option value="Natural Sciences">Natural Sciences</option>
+                  <option value="Philosophy & Literature">Philosophy & Literature</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cms-form-tag">Sub-Topic Tag *</label>
+                <input type="text" id="cms-form-tag" class="form-input" placeholder="e.g. Natural Language Processing" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cms-form-author">Author / Fellow Name *</label>
+                <input type="text" id="cms-form-author" class="form-input" placeholder="e.g. Dr. Ada Lovelace" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cms-form-affiliation">Research Affiliation</label>
+                <input type="text" id="cms-form-affiliation" class="form-input" placeholder="e.g. Computational Linguistics Laboratory">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cms-form-readtime">Estimated Read Time</label>
+                <input type="text" id="cms-form-readtime" class="form-input" placeholder="e.g. 7 min read" value="6 min read">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cms-form-difficulty">Academic Difficulty Level</label>
+                <select id="cms-form-difficulty" class="form-input">
+                  <option value="Introductory">Introductory</option>
+                  <option value="Intermediate" selected>Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label" for="cms-form-doi">Digital Object Identifier (DOI)</label>
+                <input type="text" id="cms-form-doi" class="form-input" placeholder="e.g. 10.1016/j.infoverse.2026.09.007">
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label" for="cms-form-image">Supporting Visual Image Path / Preset</label>
+                <select id="cms-form-image" class="form-input">
+                  <option value="images/neural_network_ai.jpg">Neural Network / AI Schematics (images/neural_network_ai.jpg)</option>
+                  <option value="images/library_of_alexandria.jpg">Library of Alexandria Classical Architecture (images/library_of_alexandria.jpg)</option>
+                  <option value="images/quantum_space_cosmos.jpg">Quantum Physics & Cosmos (images/quantum_space_cosmos.jpg)</option>
+                  <option value="images/dna_crispr_genetics.jpg">CRISPR & Molecular Biology (images/dna_crispr_genetics.jpg)</option>
+                  <option value="images/stoic_philosophy_statue.jpg">Stoic Philosophy Statue (images/stoic_philosophy_statue.jpg)</option>
+                  <option value="images/database_sql_architecture.jpg">Relational SQL & Storage Topology (images/database_sql_architecture.jpg)</option>
+                </select>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label" for="cms-form-schematic-tags">Technical Schematic Annotations (comma-separated badges)</label>
+                <input type="text" id="cms-form-schematic-tags" class="form-input" placeholder="e.g. ATTENTION VECTORS, TRANSFORMER LAYERS, GRADIENT DESCENT">
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label" for="cms-form-summary">Summary Synopsis (Shown on Article Cards & Header) *</label>
+                <textarea id="cms-form-summary" class="form-input form-textarea" rows="3" placeholder="Concise overview explaining the topic's core thesis and importance..." required></textarea>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label" for="cms-form-takeaways">Key Takeaways & Core Concepts (one per line)</label>
+                <textarea id="cms-form-takeaways" class="form-input form-textarea" rows="3" placeholder="Enter key bullet points (one per line)..."></textarea>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label class="form-label" for="cms-form-content">Rich Editorial Body HTML Content *</label>
+                <textarea id="cms-form-content" class="form-input form-textarea" rows="8" placeholder="<h2>1. Section Title</h2><p>Article body paragraphs...</p><blockquote>Quote</blockquote>" required></textarea>
+              </div>
+
+              <div class="cms-form-actions col-span-2">
+                <button type="submit" class="btn btn-primary" id="cms-form-submit-btn">
+                  🚀 Publish Topic to Encyclopedia
+                </button>
+                <button type="button" class="btn btn-secondary" id="cms-live-preview-btn">
+                  👁️ Generate Live Preview
+                </button>
+                <button type="button" class="btn btn-outline-gold" id="cms-form-reset-btn">
+                  ↺ Reset Form
+                </button>
+              </div>
+            </form>
+
+            <!-- Live Preview Box -->
+            <div style="margin-top: 2rem;">
+              <h4 style="font-size: 1.1rem; color: #ffffff; margin-bottom: 0.75rem;">Instant Studio Live Preview</h4>
+              <div id="cms-preview-pane">
+                <div style="color: var(--text-muted); text-align: center; padding: 2rem;">
+                  Click "👁️ Generate Live Preview" above to see formatted preview.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MODULE 5: USER & ADMIN MANAGEMENT MODULE
+         This module manages access control for the website, distinguishing between
+         regular users (who can search and browse information) and the administrator
+         (who has additional access to the Content Management Module). It ensures
+         that content modification is restricted to authorized access only.
+         ========================================================================== -->
+    <section class="admin-user-management-section" id="admin-user-management-section">
+      <div class="section-header">
+        <div>
+          <div class="module-subhead-pill">
+            <span class="module-pulse"></span>
+            <span>Module 5 of 5 • User & Admin Management Module</span>
+          </div>
+          <h2 class="section-title">🛡️ User & Access Control Management Hub</h2>
+          <p class="section-subtitle">
+            Role-Based Access Control (RBAC) engine governing access separation between regular scholars and administrators.
+          </p>
+        </div>
+      </div>
+
+      <!-- RBAC Access Gate (Shown for Regular Non-Admin Scholars) -->
+      <div class="rbac-guard-card" id="admin-rbac-guard" style="display: none;">
+        <div class="rbac-guard-icon">🔒</div>
+        <div class="rbac-guard-content">
+          <div class="rbac-pill-status">Admin Privileges Required (RBAC Enforced)</div>
+          <h3>Restricted Scholar Directory</h3>
+          <p>
+            User account management, role promotions, and platform permissions are restricted to verified Administrators.
+          </p>
+          <div class="rbac-action-row">
+            <button class="btn btn-primary" data-action="switch-to-admin-demo">
+              👑 Switch to Administrator Session (Demo Mode)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Hub Unlocked Workspace -->
+      <div class="admin-hub-workspace" id="admin-hub-content">
+        <!-- RBAC Permissions Matrix -->
+        <div class="rbac-matrix-card">
+          <div class="matrix-header">
+            <span class="matrix-icon">⚖️</span>
+            <div>
+              <h4 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 0.2rem;">InfoVerse Role-Based Access Control (RBAC) Matrix</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">Security governance enforcing privilege separation between academic tiers</p>
+            </div>
+          </div>
+
+          <div class="tech-spec-table-wrap" style="margin-top: 1rem;">
+            <table class="tech-spec-table">
+              <thead>
+                <tr>
+                  <th>Platform Feature / Operation</th>
+                  <th>🎓 Student Scholar (Regular)</th>
+                  <th>🔬 Research Fellow</th>
+                  <th>👑 Platform Administrator</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Search & Browse Categories (Mod 2)</strong></td>
+                  <td><span class="badge-allowed">✓ Unrestricted</span></td>
+                  <td><span class="badge-allowed">✓ Unrestricted</span></td>
+                  <td><span class="badge-allowed">✓ Full Access</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Information Display & TTS Audio (Mod 3)</strong></td>
+                  <td><span class="badge-allowed">✓ Allowed</span></td>
+                  <td><span class="badge-allowed">✓ Allowed</span></td>
+                  <td><span class="badge-allowed">✓ Full Access</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Save Bookmarks & User Profile (Mod 1)</strong></td>
+                  <td><span class="badge-allowed">✓ Allowed</span></td>
+                  <td><span class="badge-allowed">✓ Allowed</span></td>
+                  <td><span class="badge-allowed">✓ Full Access</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Publish / Edit / Delete Topics (Mod 4 CMS)</strong></td>
+                  <td><span class="badge-denied">✗ Restricted (403)</span></td>
+                  <td><span class="badge-denied">✗ Restricted (403)</span></td>
+                  <td><span class="badge-allowed">✓ Full Admin Access</span></td>
+                </tr>
+                <tr>
+                  <td><strong>User Directory & Role Promotion (Mod 5)</strong></td>
+                  <td><span class="badge-denied">✗ Restricted</span></td>
+                  <td><span class="badge-denied">✗ Restricted</span></td>
+                  <td><span class="badge-allowed">✓ Full Admin Access</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Registered User Accounts Directory -->
+        <div class="user-directory-card" style="margin-top: 2rem;">
+          <div class="section-header" style="border: none; padding-bottom: 0; margin-bottom: 1.25rem;">
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: #ffffff;">
+                👥 Registered Scholar Directory
+              </h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem;">
+                Manage account access, assign roles on-the-fly, and inspect scholar activity metrics.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+              <span class="cms-badge-right" id="admin-total-users-badge">4 Scholars</span>
+            </div>
+          </div>
+
+          <div class="cms-table-filter-bar">
+            <div class="search-box-wrapper" style="flex: 1; max-width: 450px; padding: 0.35rem 1rem;">
+              <span class="search-icon" style="font-size: 1rem;">🔍</span>
+              <input type="text" id="admin-user-search-input" class="search-input" style="font-size: 0.9rem;" placeholder="Search scholars by name, email, or role...">
+            </div>
+          </div>
+
+          <div class="cms-table-wrapper">
+            <table class="cms-table">
+              <thead>
+                <tr>
+                  <th style="width: 28%;">Scholar Name & Account</th>
+                  <th style="width: 22%;">System Role (RBAC)</th>
+                  <th style="width: 18%;">Academic Interest</th>
+                  <th style="width: 12%;">Bookmarks</th>
+                  <th style="width: 10%;">Joined</th>
+                  <th style="width: 10%; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-table-body">
+                <!-- Rendered dynamically by auth.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL 1: AUTHENTICATION MODAL (LOGIN & REGISTER - MODULE 1)
+       ========================================================================== -->
+  <div class="modal-overlay" id="auth-modal" aria-hidden="true" role="dialog">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-icon">🔐</div>
+          <div>
+            <h3 class="modal-title" id="auth-modal-title">Welcome Back Scholar</h3>
+            <p class="modal-subtitle" id="auth-modal-subtitle">Sign in to access your saved research & bookmarks</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="auth-modal-close" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Tab Selector -->
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="auth-tab-login">Sign In</button>
+          <button class="auth-tab-btn" id="auth-tab-register">Register New Scholar</button>
+        </div>
+
+        <!-- 1. LOGIN FORM CONTAINER -->
+        <div id="login-form-container">
+          <div id="login-error-msg" style="display: none; padding: 0.75rem; background: rgba(244, 63, 94, 0.15); border: 1px solid var(--accent-rose); border-radius: 8px; color: var(--accent-rose); font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+          <form id="login-form">
+            <div class="form-group">
+              <label class="form-label" for="login-email">Scholar Email Address</label>
+              <div class="input-with-icon">
+                <span class="input-icon">✉️</span>
+                <input type="email" id="login-email" class="form-input" placeholder="scholar@gmail.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="login-password">Password</label>
+              <div class="input-with-icon">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                <span class="password-toggle" title="Toggle password visibility">👁️</span>
+              </div>
+            </div>
+
+            <div class="form-checkbox-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="remember-me" checked>
+                <span>Remember this session</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;" id="btn-submit-login">
+              Sign In to InfoVerse →
+            </button>
+          </form>
+
+          <!-- Quick 1-Click Demo Accounts For College Viva / Evaluator Testing -->
+          <div class="quick-demo-accounts">
+            <div class="demo-title">
+              <span>⚡ 1-Click Demo Logins (Viva Evaluation)</span>
+            </div>
+            <div class="demo-buttons-grid">
+              <button class="demo-btn featured-demo" data-email="vyshnavi@infoverse.edu" data-role="Student Scholar">
+                🎓 Vyshnavi Donga (Scholar)
+              </button>
+              <button class="demo-btn" data-email="naina@infoverse.edu" data-role="Student Scholar">
+                👩‍🎓 Naina (Student)
+              </button>
+              <button class="demo-btn" data-email="researcher@infoverse.edu" data-role="Research Fellow">
+                🔬 Dr. Arjun (Fellow)
+              </button>
+              <button class="demo-btn" data-email="admin@infoverse.edu" data-role="Administrator">
+                ⚙️ Admin Lead
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. REGISTER FORM CONTAINER -->
+        <div id="register-form-container" style="display: none;">
+          <div id="reg-error-msg" style="display: none; padding: 0.75rem; background: rgba(244, 63, 94, 0.15); border: 1px solid var(--accent-rose); border-radius: 8px; color: var(--accent-rose); font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+          <form id="register-form">
+            <div class="form-group">
+              <label class="form-label" for="reg-name">Full Name</label>
+              <div class="input-with-icon">
+                <span class="input-icon">👤</span>
+                <input type="text" id="reg-name" class="form-input" placeholder="e.g. Naina KB" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-email">Email Address</label>
+              <div class="input-with-icon">
+                <span class="input-icon">✉️</span>
+                <input type="email" id="reg-email" class="form-input" placeholder="naina@gmail.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-password">Create Strong Password</label>
+              <div class="input-with-icon">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="reg-password" class="form-input" placeholder="Minimum 7 characters" required>
+                <span class="password-toggle" title="Toggle password visibility">👁️</span>
+              </div>
+              <!-- Strength Indicator -->
+              <div class="password-strength-bar">
+                <div class="strength-fill" id="strength-bar-fill"></div>
+              </div>
+              <div class="strength-label">
+                <span id="strength-text">Password Security Level</span>
+                <span style="font-size: 0.7rem; color: var(--text-muted);">Encrypted with SHA Hash</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-interest">Primary Academic Interest</label>
+              <div class="input-with-icon">
+                <span class="input-icon">🎯</span>
+                <select id="reg-interest" class="form-select">
+  <option value="Computer Science & AI">Computer Science & AI</option>
+  <option value="World History">World History</option>
+  <option value="Astrophysics & Space">Astrophysics & Space</option>
+  <option value="Natural Sciences">Natural Sciences</option>
+  <option value="Philosophy & Literature">Philosophy & Literature</option>
+</select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-role">Scholar Account Type</label>
+              <div class="input-with-icon">
+                <span class="input-icon">🏷️</span>
+                 <select id="reg-role" class="form-select">
+  <option value="Student Scholar">Student Scholar (Undergraduate)</option>
+  <option value="Postgraduate Student">Postgraduate Student</option>
+  <option value="Research Fellow">Research Fellow (Graduate / PhD)</option>
+  <option value="Academic Faculty">Academic Faculty / Teacher</option>
+  <option value="Professor">Professor</option>
+  <option value="Researcher">Researcher</option>
+  <option value="Industry Professional">Industry Professional</option>
+  <option value="Independent Learner">Independent Learner</option>
+  <option value="School Student">School Student</option>
+  <option value="Administrator">Administrator</option>
+</select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;" id="btn-submit-register">
+              Complete Registration & Save Data →
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: DATABASE & STORAGE INSPECTOR (TEACHER VIVA QUESTION HELPER)
+       "Where will data save?" -> Answers with Live Table + LocalStorage + SQL Schema
+       ========================================================================== -->
+  <div class="modal-overlay" id="db-inspector-modal" aria-hidden="true" role="dialog">
+    <div class="modal-container xl-modal">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-icon">🗄️</div>
+          <div>
+            <h3 class="modal-title">Database & Storage Architecture Inspector</h3>
+            <p class="modal-subtitle">Direct visualization for Examiner questions: "Where is user & article data stored?"</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="db-modal-close" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="db-explain-box">
+          💡 <strong>Viva Presentation Note:</strong> This panel demonstrates how InfoVerse stores registration data in real-time. In this front-end demo phase, data is persisted using the browser's <strong>HTML5 LocalStorage API</strong> (with JSON serialization & hash encryption). When connected to a backend server (Node.js/Python), it maps directly to the <strong>SQL Relational Database Schema</strong> shown below.
+        </div>
+
+        <div class="db-tabs">
+          <button class="db-tab-btn active" data-panel="panel-users-table">👥 Live Registered Users Table</button>
+          <button class="db-tab-btn" data-panel="panel-sql-schema">💾 Backend SQL Schema (CREATE TABLE)</button>
+          <button class="db-tab-btn" data-panel="panel-session-json">🔑 Active Session Token</button>
+          <button class="db-tab-btn" data-panel="panel-raw-storage">📦 Raw Storage Dump</button>
+        </div>
+
+        <!-- 1. Live Users Table Panel -->
+        <div class="db-panel active" id="panel-users-table">
+          <div class="db-table-wrapper">
+            <table class="db-table">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Encrypted Hash</th>
+                  <th>Role</th>
+                  <th>Registration Date</th>
+                </tr>
+              </thead>
+              <tbody id="db-users-table-body">
+                <!-- Populated dynamically by app.js -->
+              </tbody>
+            </table>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">
+              ✅ Any user registered in Module 1 automatically appears in this live table.
+            </span>
+            <button class="banner-btn" id="reset-db-btn" style="color: var(--accent-rose);">
+              🔄 Reset to Default Seed Data
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. SQL Schema Panel -->
+        <div class="db-panel" id="panel-sql-schema">
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            Standard SQL relational schema designed for PostgreSQL / MySQL deployment:
+          </p>
+          <div class="code-snippet-box" id="db-sql-schema-code"></div>
+        </div>
+
+        <!-- 3. Active Session Panel -->
+        <div class="db-panel" id="panel-session-json">
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            Current authenticated session token and encrypted credential context:
+          </p>
+          <pre class="code-snippet-box" id="db-session-json"></pre>
+        </div>
+
+        <!-- 4. Raw Storage Panel -->
+        <div class="db-panel" id="panel-raw-storage">
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            Full JSON snapshot persisted in the browser key-value engine:
+          </p>
+          <pre class="code-snippet-box" id="db-raw-json"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 3: ARTICLE READER MODAL (MODULE 3 - TEXT-TO-SPEECH & STUDY MODE)
+       ========================================================================== -->
+  <div class="modal-overlay" id="reader-modal" aria-hidden="true" role="dialog">
+    <div class="modal-container large-modal">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-icon">📖</div>
+          <div>
+            <h3 class="modal-title" id="reader-article-title">Article Title</h3>
+            <p class="modal-subtitle">
+              <span id="reader-article-category">Category</span> • By <span id="reader-article-author">Author</span> • <span id="reader-article-date">Date</span>
+            </p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="reader-modal-close" aria-label="Close reader">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Scholarly Reader Toolbar -->
+        <div class="reader-toolbar">
+          <div class="reader-tool-group">
+            <span class="article-badge" id="reader-article-tag">Tag</span>
+            <span class="read-time" id="reader-article-time">⏳ 5 min read</span>
+          </div>
+
+          <div class="reader-tool-group">
+            <!-- Text to Speech Button -->
+            <button class="reader-tool-btn" id="reader-tts-btn" title="Listen to text-to-speech audio">
+              🔊 Read Aloud
+            </button>
+            <!-- Font Size Adjusters -->
+            <button class="reader-tool-btn" id="reader-font-dec" title="Decrease font size">A-</button>
+            <button class="reader-tool-btn" id="reader-font-inc" title="Increase font size">A+</button>
+          </div>
+        </div>
+
+        <!-- Article Banner Cover Image -->
+        <img id="reader-article-cover" src="images/neural_network_ai.jpg" alt="Article Cover" style="width: 100%; height: 260px; object-fit: cover; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border-purple);">
+
+        <!-- Article Content Body -->
+        <article class="article-content-body" id="reader-article-body">
+          <!-- Populated dynamically -->
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 4: USER PROFILE & SAVED BOOKMARKS MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="profile-modal" aria-hidden="true" role="dialog">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-icon">👤</div>
+          <div>
+            <h3 class="modal-title">Scholar Research Profile</h3>
+            <p class="modal-subtitle">Active Session & Saved Bookmarks</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="profile-modal-close" aria-label="Close profile">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="profile-header-card">
+          <div class="profile-avatar-large" id="profile-initial">N</div>
+          <div class="profile-info">
+            <h3 id="profile-name">Naina Sharma</h3>
+            <div class="profile-email" id="profile-email">naina@infoverse.edu</div>
+            <div class="profile-badges">
+              <span class="profile-role-badge" id="profile-role">Student Scholar</span>
+              <span class="profile-role-badge" id="profile-interest" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-blue);">Computer Science</span>
+            </div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 1.1rem; margin-bottom: 0.85rem; display: flex; align-items: center; justify-content: space-between;">
+          <span>⭐ Saved Bookmarks (<span id="profile-bookmarks-count">0</span>)</span>
+        </h4>
+
+        <div id="profile-bookmarks-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 5: VIVA & EXAMINER DEFENSE GUIDE
+       ========================================================================== -->
+  <div class="modal-overlay" id="viva-guide-modal" aria-hidden="true" role="dialog">
+    <div class="modal-container large-modal">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-icon">🎓</div>
+          <div>
+            <h3 class="modal-title">Project Viva Q&A & Defense Cheatsheet</h3>
+            <p class="modal-subtitle">Ready answers for your project review and teacher questions</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="viva-modal-close" aria-label="Close guide">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.25rem;">
+            <h4 style="color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 0.4rem;">
+              Q1. "Where will registration and user data save?"
+            </h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+              <strong>Answer to tell teacher:</strong> "In Phase 1, data is stored client-side in the browser's persistent <strong>LocalStorage & IndexedDB engine</strong> in structured JSON format with cryptographic password hashing. When deployed to production, it maps directly to our <strong>relational SQL database schema</strong> (PostgreSQL/MySQL) with a dedicated <code>users</code> table, <code>articles</code> table, and <code>bookmarks</code> table. You can inspect this live right now by clicking the <em>Database & Storage Inspector</em> button!"
+            </p>
+          </div>
+
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.25rem;">
+            <h4 style="color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 0.4rem;">
+              Q2. "What are the 5 modules of your project?"
+            </h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+              <strong>Answer:</strong>
+              <br>1. <strong>Module 1: Authentication & User Profiles</strong> (User registration with validation, password strength meter, persistent session tokens, and scholar profiles).
+              <br>2. <strong>Module 2: Category & Topic Discovery Engine</strong> (Academic category taxonomy, real-time zero-latency search engine, auto-suggestions, and match highlighting).
+              <br>3. <strong>Module 3: Information Display Module</strong> (Presents detailed content of a selected topic or category in a clean, readable format with structured headings, typography scaling, supporting imagery, dynamic Table of Contents, and Web Speech API text-to-speech audio reader).
+              <br>4. <strong>Module 4: Content Management Module (CMS)</strong> (Handles the addition, editing, and deletion of information within the platform without directly modifying underlying code).
+              <br>5. <strong>Module 5: User & Admin Management Module (RBAC)</strong> (Manages role-based access control, distinguishing regular users who search/browse from administrators who have authorized access to modify content).
+            </p>
+          </div>
+
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.25rem;">
+            <h4 style="color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 0.4rem;">
+              Q3. "How does the search and category filtering work?"
+            </h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+              <strong>Answer:</strong> "The search engine indexes titles, summaries, tags, and body content dynamically. As the user types, it performs real-time multi-field text matching, keyword highlighting with regular expressions, and category slug filtering simultaneously with zero latency."
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER (ALL 5 MODULES LINKED)
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.8rem;">📚</span>
+          <span style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 800;">InfoVerse</span>
+        </div>
+        <p>
+          A state-of-the-art digital encyclopedia web application built for academic research, student knowledge discovery, and college software engineering capstone presentation.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Disciplines</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=cs-ai]').click();">Computer Science & AI</a></li>
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=history]').click();">World History</a></li>
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=space]').click();">Astrophysics & Space</a></li>
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=science]').click();">Natural Sciences</a></li>
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-category=philosophy]').click();">Philosophy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Project Modules</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" data-action="open-auth-modal">Module 1: Authentication</a></li>
+          <li><a href="#hero-section">Module 2: Search & Discovery</a></li>
+          <li><a href="#info-display-section">Module 3: Information Display</a></li>
+          <li><a href="#cms-management-section">Module 4: Content Management (CMS)</a></li>
+          <li><a href="#admin-user-management-section">Module 5: User & Admin Hub (RBAC)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>System & Viva</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" data-action="open-db-inspector">🗄️ Database Inspector</a></li>
+          <li><a href="javascript:void(0)" data-action="open-viva-guide">📋 Viva Defense Guide</a></li>
+          <li><a href="javascript:void(0)" data-action="open-auth-modal" data-tab="login">Sign In</a></li>
+          <li><a href="javascript:void(0)" data-action="open-auth-modal" data-tab="register">Register Account</a></li>
+          <li><a href="javascript:void(0)" id="footer-theme-toggle" onclick="document.getElementById('theme-toggle-btn').click();">Switch Theme</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 InfoVerse Encyclopedia. Designed for Academic Project Submission (All 5 Modules 1, 2, 3, 4 & 5 Complete).
+      </div>
+      <div>
+        Technology: HTML5 • CSS3 Vanilla Design System • JavaScript ES6+ Storage Engine • Web Speech API
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Ordered with dependencies -->
+  <script src="js/database.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api-auth.js"></script>
+  <script src="js/encyclopedia.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
